@@ -50,6 +50,36 @@ This page will be invoked via redirect from the Authorization server at the conc
 
 The other content you see in the source folder is the site for this tutorial. We used <a href="https://github.com/lord/slate" target="_blank">Slate</a> to create the documentation for this tutorial.
 
+# MPage Integration
+
+There are a few different files/tags you need to add within your application to securely embed the SMART App within 
+an MPage view. We've already set this up in the example app for you, so there's no work needed in this step.
+
+1. Set the `html` tag to hidden and set a `meta` tag to pull in the latest version of Internet Explorer for each view in the application
+
+```html
+<html hidden>
+  <head>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge' />
+    ...
+```
+
+2. Include the `babel-polyfill` module into the project to support ES2015+ JavaScript standard methods and Objects that this project (and included libraries) may use.
+```html
+<script src='https://cdnjs.cloudflare.com/ajax/libs/babel-polyfill/6.26.0/polyfill.min.js'></script>
+```
+
+3. Include the files below that use the [Cerner XFC](https://github.com/cerner/xfc) (Cross-Frame-Container) library to prevent possible [Clickjacking
+attacks](https://www.owasp.org/index.php/Clickjacking) in any browser. These files can be pulled in from the [Cerner SMART Embeddable Library](https://github.com/cerner/cerner-smart-embeddable-lib). That project
+description will contain content on how to properly size the application, as well as additional considerations around conflicting HTTP headers.
+```html
+<link rel='stylesheet' type='text/css' href='./lib/css/cerner-smart-embeddable-lib-[version].min.css'>
+```
+```html
+<script src='./lib/js/cerner-smart-embeddable-lib-[version].min.js'></script>
+```
+
+
 # GitHub Pages
 
 >index.html
